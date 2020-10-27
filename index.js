@@ -2,6 +2,8 @@ const gitUsername = require('git-username');
 
 const trimSlash = (url) => url.replace(/\/$/, '');
 
+const unGitUrl = (url) => url.replace(/^git\+/, '').replace(/.git$/, '');
+
 module.exports = (pkg = require('./package.json')) => {
 	if (!pkg) {
 		return '';
@@ -10,14 +12,20 @@ module.exports = (pkg = require('./package.json')) => {
 	const url = (pkg.repository && pkg.repository.url) || pkg.repository;
 
 	if (url) {
-		return trimSlash(
-			url.startsWith('https:') ? url : `https://github.com/${url}`
-		);
+		if (url.startsWith('https:')) {
+			return trimSlash(url);
+		}
+
+		if (url.startsWith('git+')) {
+			return unGitUrl(url);
+		}
+
+		return trimSlash(`https://github.com/${url}`);
 	}
 
 	const gitUser = gitUsername();
 
-	if (!gitUser || pkg.name) {
+	if (!gitUser || !pkg.name) {
 		return '';
 	}
 
