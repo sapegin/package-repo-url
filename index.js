@@ -1,10 +1,13 @@
+const path = require('path');
 const gitUsername = require('git-username');
 
 const trimSlash = (url) => url.replace(/\/$/, '');
 
 const unGitUrl = (url) => url.replace(/^git\+/, '').replace(/.git$/, '');
 
-module.exports = (pkg = require('./package.json')) => {
+module.exports = (
+	pkg = require(path.resolve(process.cwd(), 'package.json'))
+) => {
 	if (!pkg) {
 		return '';
 	}
