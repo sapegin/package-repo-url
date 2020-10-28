@@ -1,7 +1,7 @@
 {
   "name": "package-repo-url",
-  "version": "1.0.2",
-  "description": "Returns GitHub repository URL based on `package.json`.",
+  "version": "1.0.3",
+  "description": "Returns GitHub repository URL based on package.json",
   "author": {
     "name": "Artem Sapegin",
     "url": "https://sapegin.me"
