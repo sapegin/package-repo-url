@@ -24,7 +24,7 @@ module.exports = (pkg = getDefaultValue()) => {
 
 	if (url) {
 		if (url.startsWith('https:')) {
-			return trimSlash(url);
+			return unGitUrl(trimSlash(url));
 		}
 
 		if (url.startsWith('git+')) {
